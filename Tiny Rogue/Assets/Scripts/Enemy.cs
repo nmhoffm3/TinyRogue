@@ -1,16 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.XR;
+
+[Serializable]
+public class Drop
+{
+    public GameObject obj;
+    [Range(0, 1)]
+    public float rate;
+}
 
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int MAX_HEALTH = 1;
     [SerializeField] private GameObject damageText;
-    [SerializeField] private List<GameObject> drops = new List<GameObject>();
-    [SerializeField] private List<float> dropRates = new List<float>();
+    [SerializeField] private List<Drop> drops = new List<Drop>();
 
     [SerializeField] private int DAMAGE = 1;
     private int health = 0;
@@ -20,16 +30,13 @@ public class Enemy : MonoBehaviour
 
     private float damageTime = 1;
     private float cooldown = -1;
+    private Collider2D col;
     // Start is called before the first frame update
     void Start()
     {
         health = MAX_HEALTH;
         enemySpawner = GameObject.Find("GameManager").GetComponent<EnemySpawner>();
-
-        if(drops.Count != dropRates.Count)
-        {
-            Debug.LogError("Drops and Drop Count lists are not of equal length!!");
-        }
+        col = GetComponentInChildren<Collider2D>();
     }
 
     // Update is called once per frame
@@ -39,11 +46,14 @@ public class Enemy : MonoBehaviour
         HandleAttack();
     }
 
+    
+
 
     private void HandleLife()
     {
-        if(health < 1)
+        if(health <= 0)
         {
+            SpawnDrops();
             Destroy(gameObject);
         }
 
@@ -68,30 +78,51 @@ public class Enemy : MonoBehaviour
 
     public void DecreaseHealth(int num)
     {
+        if(health <= 0)
+        {
+            return;
+        }
         health -= num;
-        GameObject newPop = Instantiate(damageText, transform.position - new Vector3(0.5f,0.5f), Quaternion.identity);
-        TextMeshProUGUI damage = newPop.GetComponentInChildren<TextMeshProUGUI>();
-        damage.color = Color.red;
-        damage.text = num.ToString();
+        CreatePopUp(Color.red, num);
     }
 
     public void IncreaseHealth(int num)
     {
         health += num;
+        CreatePopUp(Color.green, num);
+    }
+
+
+    private void CreatePopUp(Color c, int num)
+    {
         GameObject newPop = Instantiate(damageText, transform.position - new Vector3(0.5f,0.5f), Quaternion.identity);
         TextMeshProUGUI damage = newPop.GetComponentInChildren<TextMeshProUGUI>();
-        damage.color = Color.green;
+        damage.color = c;
         damage.text = num.ToString();
+    }
+
+    private void SpawnDrops()
+    {
+        foreach(var d in drops)
+        {
+            float result = UnityEngine.Random.Range(0.0f, 1.0f);
+            if(result < d.rate || d.rate == 1)
+            {
+                Vector2 spawnPos = UnityEngine.Random.insideUnitCircle;
+                spawnPos = spawnPos.normalized;
+                Instantiate(d.obj, transform.position + (Vector3) spawnPos, Quaternion.identity).name = d.obj.name;
+            }
+        }
     }
 
 
 
     private void OnDestroy() 
     {
-        enemySpawner.DecreaseCount();    
+        enemySpawner.DecreaseCount();
     }
 
-    public int Attack()
+    private int Attack()
     {
         if(cooldown == -1)
         {
@@ -112,5 +143,7 @@ public class Enemy : MonoBehaviour
             other.GetComponent<Player>().ApplyDamage(Attack());
         }
     }
+
+    
     
 }

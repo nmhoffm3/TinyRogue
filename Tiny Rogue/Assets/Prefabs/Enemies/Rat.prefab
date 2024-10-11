@@ -16,6 +16,18 @@ PrefabInstance:
       propertyPath: MAX_HEALTH
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1778400875080418173, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
+      propertyPath: drops.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778400875080418173, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
+      propertyPath: drops.Array.data[0].obj
+      value: 
+      objectReference: {fileID: 1005407479734898657, guid: b749d75482b797642a31667166a33062, type: 3}
+    - target: {fileID: 1778400875080418173, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
+      propertyPath: drops.Array.data[0].rate
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 4710082849053636959, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: m_Sprite
       value: 

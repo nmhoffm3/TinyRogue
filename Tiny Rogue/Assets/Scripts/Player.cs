@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,13 +6,25 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Serializable]
+    public class WeaponStack
+    {
+        public string name;
+        public int stack;
+        public WeaponStack(string newName, int newStack)
+        {
+            name = newName;
+            stack = newStack;
+        }        
+    }
 
     [SerializeField] private int MAX_HEALTH = 1;
     
     [SerializeField] private GameObject damageText;
 
+    [SerializeField] private int MAX_WEAPON_STACK = 5;
     
-    
+    private List<WeaponStack> weapons = new List<WeaponStack>();
     private int health;
     // Start is called before the first frame update
     void Start()
@@ -61,6 +74,25 @@ public class Player : MonoBehaviour
     public int GetMaxHealth()
     {
         return MAX_HEALTH;
+    }
+
+
+    public bool AddWeapon(string newWeapon)
+    {
+        for(int i = 0; i < weapons.Count; i++)
+        {
+            if(weapons[i].name.Equals(newWeapon))
+            {
+                if(weapons[i].stack >= MAX_WEAPON_STACK)
+                {
+                    return false;
+                }
+                weapons[i].stack++;
+                return true;
+            }
+        }
+        weapons.Add(new WeaponStack(newWeapon, 1));
+        return true;
     }
 
 }

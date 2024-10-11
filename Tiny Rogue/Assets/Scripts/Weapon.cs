@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
     private enum WeaponType {RANGED, MELEE}
 
     [SerializeField] private WeaponType type;
-    [SerializeField] private int DAMAGE = 1;
+    [SerializeField] private int damage = 1;
 
     [SerializeField] private float COOLDOWN = 0;
 
@@ -122,43 +122,69 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    private void IncreaseDamage(int num)
+    {
+        damage += num;
+    }
+
+
+    public bool GetOwned()
+    {
+        return owned;
+    }
+
+    public int GetDamage()
+    {
+        return damage;
+    }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if(owned && transform.parent && other.gameObject != transform.parent)
+        {
+            if(other.tag.Equals("Enemy"))
+            {
+                Enemy e = other.GetComponent<Enemy>();
+                if(!e) return;
+                e.DecreaseHealth(damage);
+                
+            }
+
+            if(other.tag.Equals("Player"))
+            {
+                Player p = other.GetComponent<Player>();
+                if(!p) return;
+                p.ApplyDamage(damage);
+            }
+        }
+
         if(other.tag.Equals("Player") && !owned)
         {
+            Player p = other.GetComponent<Player>();
+            if(!p.AddWeapon(gameObject.name))
+            {
+                Weapon[] weapons = other.GetComponentsInChildren<Weapon>();
+                foreach(var w in weapons)
+                {
+                    if(w.name.Equals(gameObject.name))
+                    {
+                        w.IncreaseDamage(damage);
+                    }
+                }
+                Destroy(gameObject);
+                return;
+            }
             transform.position = other.transform.position;
             transform.parent = other.transform;
             owned = true;
             sr.enabled = false;
-            area.enabled = false;
+            area.enabled = false; 
         }
 
-        if(!owned || !transform.parent)
-        {
-            return;
-        }
-
-
-        if(other.gameObject == transform.parent)
-        {
-            return;
-        }
-
-        if(other.tag.Equals("Enemy"))
-        {
-            Enemy e = other.GetComponent<Enemy>();
-            if(!e) return;
-            e.DecreaseHealth(DAMAGE);
-        }
-
-        if(other.tag.Equals("Player"))
-        {
-            Player p = other.GetComponent<Player>();
-            if(!p) return;
-            p.ApplyDamage(DAMAGE);
-        }
+        
     }
+
     
 
     
