@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         HandleLife();
-        Debug.Log(health.ToString());
+        
     }
 
 

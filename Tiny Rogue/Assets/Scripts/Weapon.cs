@@ -47,6 +47,10 @@ public class Weapon : MonoBehaviour
 
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        if(transform.parent)
+        {
+            owned = true;
+        }
     }
 
     // Update is called once per frame
@@ -127,6 +131,7 @@ public class Weapon : MonoBehaviour
             transform.parent = other.transform;
             owned = true;
             sr.enabled = false;
+            area.enabled = false;
         }
 
         if(!owned || !transform.parent)
@@ -134,14 +139,24 @@ public class Weapon : MonoBehaviour
             return;
         }
 
-        if(other.tag.Equals("Enemy") && other.gameObject != transform.parent)
+
+        if(other.gameObject == transform.parent)
+        {
+            return;
+        }
+
+        if(other.tag.Equals("Enemy"))
         {
             Enemy e = other.GetComponent<Enemy>();
-            if(!e)
-            {
-                return;
-            }
+            if(!e) return;
             e.DecreaseHealth(DAMAGE);
+        }
+
+        if(other.tag.Equals("Player"))
+        {
+            Player p = other.GetComponent<Player>();
+            if(!p) return;
+            p.ApplyDamage(DAMAGE);
         }
     }
     
