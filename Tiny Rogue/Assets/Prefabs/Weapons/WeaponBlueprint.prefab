@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2810804329339864788}
   - component: {fileID: 9168579829358441672}
   - component: {fileID: 6232350342153039652}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WeaponBlueprint
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -152,6 +152,8 @@ MonoBehaviour:
   DAMAGE: 1
   COOLDOWN: 0
   ATTACK_TIME: 1
+  projectile: {fileID: 0}
+  owned: 0
 --- !u!95 &6232350342153039652
 Animator:
   serializedVersion: 7
@@ -184,7 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6467823349668387039}
   - component: {fileID: 340738038030243706}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WeaponArea
   m_TagString: Weapon
   m_Icon: {fileID: 0}

@@ -49,6 +49,10 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemies()
     {
+        if(!player)
+        {
+            return;
+        }
         int index = Random.Range(0, enemies.Count);
         GameObject choice = enemies[index];
         for (int i = 0; i < spawnQuantity; i++)

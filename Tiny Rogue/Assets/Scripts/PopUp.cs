@@ -37,7 +37,7 @@ public class PopUp : MonoBehaviour
     private void HandleMovement()
     {
         transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
-        Debug.Log(transform.position);
+        
     }
 
     private void HandleShrink()

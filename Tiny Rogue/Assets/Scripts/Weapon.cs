@@ -107,10 +107,7 @@ public class Weapon : MonoBehaviour
             area.enabled = true;
             anim.SetTrigger("Attack");
         }
-
-
-        Debug.Log("Melee Attack!");
-        
+       
 
 
         if(delta > ATTACK_TIME)
@@ -132,8 +129,12 @@ public class Weapon : MonoBehaviour
             sr.enabled = false;
         }
 
+        if(!owned)
+        {
+            return;
+        }
 
-        if(other.tag.Equals("Enemy"))
+        if(other.tag.Equals("Enemy") && other.gameObject != transform.parent)
         {
             Enemy e = other.GetComponent<Enemy>();
             e.DecreaseHealth(DAMAGE);

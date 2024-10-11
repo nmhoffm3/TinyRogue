@@ -29,6 +29,11 @@ public class EnemyMovement : MonoBehaviour
 
     private void HandleMovement()
     {
+        if(!player)
+        {
+            Debug.Log("Player is NULL");
+            return;
+        }
         if(Vector2.Distance(player.transform.position, transform.position) > stopDist)
         {
             Vector2 md = player.transform.position - transform.position;
