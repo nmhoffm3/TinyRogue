@@ -53,6 +53,14 @@ public class Player : MonoBehaviour
             }
     }
 
+    public int GetHealth()
+    {
+        return health;
+    }
 
+    public int GetMaxHealth()
+    {
+        return MAX_HEALTH;
+    }
 
 }
