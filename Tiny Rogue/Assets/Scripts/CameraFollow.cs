@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private float camSpeed = 1;
 
-    private float stopDist = 0.4f;
+    [SerializeField] private float stopDist = 0.4f;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +15,7 @@ public class CameraFollow : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         HandleCamera();
     }

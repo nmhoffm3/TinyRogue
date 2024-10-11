@@ -98,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9168579829358441672, guid: 7710e2544c73a0b48b53ec8f1a7d9233, type: 3}
       propertyPath: COOLDOWN
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9168579829358441672, guid: 7710e2544c73a0b48b53ec8f1a7d9233, type: 3}
       propertyPath: ATTACK_TIME

@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7823896847185303882, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
+      propertyPath: stopDist
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 1778400875080418173, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: MAX_HEALTH
       value: 1

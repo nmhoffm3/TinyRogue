@@ -129,7 +129,7 @@ public class Weapon : MonoBehaviour
             sr.enabled = false;
         }
 
-        if(!owned)
+        if(!owned || !transform.parent)
         {
             return;
         }
@@ -137,6 +137,10 @@ public class Weapon : MonoBehaviour
         if(other.tag.Equals("Enemy") && other.gameObject != transform.parent)
         {
             Enemy e = other.GetComponent<Enemy>();
+            if(!e)
+            {
+                return;
+            }
             e.DecreaseHealth(DAMAGE);
         }
     }
