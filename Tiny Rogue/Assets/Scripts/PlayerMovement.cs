@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
 
     [SerializeField] private float m_Speed = 0;
 
-    
+    private Vector2 md = Vector2.zero;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +26,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
-        Vector2 md = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         md = md.normalized * m_Speed * Time.deltaTime;
         transform.Translate(md);
     }
+
+    public void OnMove(InputAction.CallbackContext c)
+    {
+        if(c.performed)
+        {
+            md = c.ReadValue<Vector2>();
+        }
+        if(c.canceled)
+        {
+            md = Vector2.zero;
+        }
+    }
+
 }
