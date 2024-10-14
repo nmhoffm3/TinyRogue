@@ -19,6 +19,10 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!player)
+        {
+            return;
+        }
         int hp = player.GetHealth();
         int max = player.GetMaxHealth();
         float calc = (float) hp / max;

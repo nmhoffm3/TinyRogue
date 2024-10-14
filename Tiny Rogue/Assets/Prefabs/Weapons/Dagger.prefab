@@ -121,9 +121,17 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9168579829358441672, guid: 7710e2544c73a0b48b53ec8f1a7d9233, type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 56ec1bcf451872c43a7e485973345ec1, type: 3}
+    - target: {fileID: 9168579829358441672, guid: 7710e2544c73a0b48b53ec8f1a7d9233, type: 3}
       propertyPath: ATTACK_TIME
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 9168579829358441672, guid: 7710e2544c73a0b48b53ec8f1a7d9233, type: 3}
+      propertyPath: attackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 271b2d5e789efbe4fa11c83f5869a3d6, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

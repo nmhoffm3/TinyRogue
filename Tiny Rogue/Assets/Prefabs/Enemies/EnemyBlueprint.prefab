@@ -144,7 +144,6 @@ MonoBehaviour:
   MAX_HEALTH: 1
   damageText: {fileID: 681845927122752365, guid: 97303ce7d3a9ed64f98753010f4b90f4, type: 3}
   drops: []
-  dropRates: []
   DAMAGE: 1
 --- !u!61 &-725764523290139969
 BoxCollider2D:
@@ -194,7 +193,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!50 &-9032333786162884496
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -205,8 +204,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -270,6 +269,7 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

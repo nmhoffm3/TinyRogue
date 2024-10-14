@@ -17,6 +17,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private GameObject projectile;
     [SerializeField] private bool owned = false;
 
+    [SerializeField] private AudioClip attackSound;
+    [SerializeField] private AudioClip hitSound;
     private Transform player;
 
     private Collider2D area;
@@ -26,6 +28,8 @@ public class Weapon : MonoBehaviour
     private float delta = 0;
 
     private Animator anim;
+
+    private AudioSource audioSource;
 
     
 
@@ -47,6 +51,7 @@ public class Weapon : MonoBehaviour
 
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         if(transform.parent)
         {
             owned = true;
@@ -110,6 +115,7 @@ public class Weapon : MonoBehaviour
             sr.enabled = true;
             area.enabled = true;
             anim.SetTrigger("Attack");
+            audioSource.PlayOneShot(attackSound);
         }
        
 
@@ -148,7 +154,7 @@ public class Weapon : MonoBehaviour
                 Enemy e = other.GetComponent<Enemy>();
                 if(!e) return;
                 e.DecreaseHealth(damage);
-                
+                audioSource.PlayOneShot(hitSound);
             }
 
             if(other.tag.Equals("Player"))
@@ -156,7 +162,10 @@ public class Weapon : MonoBehaviour
                 Player p = other.GetComponent<Player>();
                 if(!p) return;
                 p.ApplyDamage(damage);
+                audioSource.PlayOneShot(hitSound);
             }
+
+            
         }
 
         if(other.tag.Equals("Player") && !owned)

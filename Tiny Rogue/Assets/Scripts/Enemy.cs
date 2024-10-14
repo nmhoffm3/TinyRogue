@@ -11,6 +11,7 @@ using UnityEngine.XR;
 public class Drop
 {
     public GameObject obj;
+    public int amount;
     [Range(0, 1)]
     public float rate;
 }
@@ -108,9 +109,13 @@ public class Enemy : MonoBehaviour
             float result = UnityEngine.Random.Range(0.0f, 1.0f);
             if(result < d.rate || d.rate == 1)
             {
-                Vector2 spawnPos = UnityEngine.Random.insideUnitCircle;
-                spawnPos = spawnPos.normalized;
-                Instantiate(d.obj, transform.position + (Vector3) spawnPos, Quaternion.identity).name = d.obj.name;
+                for(int i = 0; i < d.amount; i++)
+                {
+                    Vector2 spawnPos = UnityEngine.Random.insideUnitCircle;
+                    spawnPos = spawnPos.normalized;
+                    Instantiate(d.obj, transform.position + (Vector3) spawnPos, Quaternion.identity).name = d.obj.name;
+                }
+                
             }
         }
     }
