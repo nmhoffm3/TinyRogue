@@ -15,6 +15,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int spawnMax = 1;
 
     private GameObject player;
+    private Player p;
 
     private int spawnCount = 0;
 
@@ -28,6 +29,7 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.LogWarning("PLAYER IS NULL");
         }
+        p = player.GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -53,14 +55,23 @@ public class EnemySpawner : MonoBehaviour
         {
             return;
         }
-        int index = Random.Range(0, enemies.Count);
-        GameObject choice = enemies[index];
+        int index = 0;
+        int lvl = p.GetLevel();
         for (int i = 0; i < spawnQuantity; i++)
         {
             if(spawnCount >= spawnMax)
             {
                 return;
             }
+            if(lvl > enemies.Count)
+            {
+                index = Random.Range(0, enemies.Count);
+            }
+            else
+            {
+                index = Random.Range(0, lvl);
+            }
+            GameObject choice = enemies[index];
             Vector2 cir = Random.insideUnitCircle.normalized;
             Vector3 pos = new Vector3(cir.x, cir.y, 0) * spawnRange;
             Instantiate(choice, player.transform.position + pos, choice.transform.rotation).name = choice.name;

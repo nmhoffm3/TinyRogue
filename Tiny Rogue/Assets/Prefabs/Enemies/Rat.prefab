@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7823896847185303882, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: m_Speed
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7823896847185303882, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: stopDist
@@ -46,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1778400875080418173, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: drops.Array.data[2].rate
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1778400875080418173, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: drops.Array.data[0].amount

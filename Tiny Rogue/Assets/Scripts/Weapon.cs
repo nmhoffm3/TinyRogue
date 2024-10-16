@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private WeaponType type;
     [SerializeField] private int damage = 1;
-
+    [SerializeField] private int RANGE = 1;
     [SerializeField] private float COOLDOWN = 0;
 
     [SerializeField] private float ATTACK_TIME = 1;
@@ -19,7 +20,6 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private AudioClip attackSound;
     [SerializeField] private AudioClip hitSound;
-    private Transform player;
 
     private Collider2D area;
 
@@ -37,11 +37,7 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        if(!player)
-        {
-            Debug.LogWarning("PLAYER IS NULL");
-        }
+        
 
         area = GetComponentInChildren<Collider2D>();
         if(!area)
@@ -61,7 +57,7 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.parent != player && !owned)
+        if(!owned)
         {
             return;
         }
@@ -101,10 +97,62 @@ public class Weapon : MonoBehaviour
 
     private void RangedAttack()
     {
+        
+        if(!attacking)
+        {
+            RaycastHit2D[] enemies = Physics2D.CircleCastAll(transform.position, RANGE, Vector2.zero);
+            if(enemies.Length > 0)
+            {
+                
+                Transform tar = null;
+                foreach(var hit in enemies)
+                {
+                    if(!hit.transform.tag.Equals(transform.parent.tag))
+                    {
+                        tar = hit.transform;
+                        break;
+                    }
+                }
+                if(tar == null)
+                {
+                    
+                    return;
+                }
+                
+                foreach(var e in enemies)
+                {
+                    if(Vector2.Distance(transform.position, tar.position) > Vector2.Distance(transform.position, e.transform.position))
+                    {
+                        if(!e.transform.tag.Equals(transform.parent.tag))
+                        {
+                            tar = e.transform;
+                        }
+                        
+                    }
+                }
+                attacking = true;
+                sr.enabled = true;
+                area.enabled = true;
+                anim.SetTrigger("Attack");
+                audioSource.PlayOneShot(attackSound);
+                Projectile newPro = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Projectile>();
+                newPro.SetTarget(tar);
+                newPro.SetDamage(damage);
+                newPro.SetOrigin(GetComponent<Weapon>());
+                if(!transform.parent.tag.Equals("Player"))
+                {
+                    newPro.isEnemyOwned();
+                }
+            }
+        }
+
         if(delta > ATTACK_TIME)
         {
             attacking = false;
+            sr.enabled = false;
+            area.enabled = false;
         }
+
     }
 
     private void MeleeAttack()
@@ -142,6 +190,12 @@ public class Weapon : MonoBehaviour
     public int GetDamage()
     {
         return damage;
+    }
+
+
+    public void PlayHitSound()
+    {
+        audioSource.PlayOneShot(hitSound);
     }
 
 
@@ -193,13 +247,5 @@ public class Weapon : MonoBehaviour
 
         
     }
-
-    
-
-    
-
-
-
-
     
 }
