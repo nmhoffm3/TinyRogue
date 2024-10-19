@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
+
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -52,6 +52,11 @@ public class Weapon : MonoBehaviour
         {
             owned = true;
         }
+
+        if(owned)
+        {
+            delta = Random.Range(0, COOLDOWN);
+        }
     }
 
     // Update is called once per frame
@@ -100,10 +105,10 @@ public class Weapon : MonoBehaviour
         
         if(!attacking)
         {
-            RaycastHit2D[] enemies = Physics2D.CircleCastAll(transform.position, RANGE, Vector2.zero);
+            RaycastHit2D[] enemies = Physics2D.CircleCastAll(transform.parent.position, RANGE, Vector2.zero);
             if(enemies.Length > 0)
             {
-                
+                //Debug.Log("Enemies Hit");
                 Transform tar = null;
                 foreach(var hit in enemies)
                 {
@@ -115,7 +120,7 @@ public class Weapon : MonoBehaviour
                 }
                 if(tar == null)
                 {
-                    
+                    //Debug.Log("Enemy is NULL");
                     return;
                 }
                 
@@ -192,6 +197,21 @@ public class Weapon : MonoBehaviour
         return damage;
     }
 
+    
+    override public string ToString()
+    {
+        switch(type)
+        {
+            case WeaponType.MELEE:
+                return $"{gameObject.name}\nType:	MELEE\nDmg:	{damage}\nCooldown:	{COOLDOWN} sec";
+            case WeaponType.RANGED:
+                return $"{gameObject.name}\nType:	RANGED\nRange:	{RANGE}\nDmg:	{damage}\nCooldown:	{COOLDOWN} sec\nPierce:  {projectile.GetComponent<Projectile>().isPierce()}";
+            default:
+                return "No WeaponType";
+        }
+        
+    }
+
 
     public void PlayHitSound()
     {
@@ -201,7 +221,7 @@ public class Weapon : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(owned && transform.parent && other.gameObject != transform.parent)
+        if(owned && transform.parent && !other.tag.Equals(transform.parent.tag) && type == WeaponType.MELEE)
         {
             if(other.tag.Equals("Enemy"))
             {

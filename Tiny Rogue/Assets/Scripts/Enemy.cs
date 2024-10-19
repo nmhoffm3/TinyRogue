@@ -24,20 +24,22 @@ public class Enemy : MonoBehaviour
     [SerializeField] private List<Drop> drops = new List<Drop>();
 
     [SerializeField] private int DAMAGE = 1;
+
+    [SerializeField] private AudioClip playerHitSound;
+
+    private AudioSource audioSource;
     private int health = 0;
 
     private EnemySpawner enemySpawner;
 
-
     private float damageTime = 1;
     private float cooldown = -1;
-    private Collider2D col;
     // Start is called before the first frame update
     void Start()
     {
         health = MAX_HEALTH;
         enemySpawner = GameObject.Find("GameManager").GetComponent<EnemySpawner>();
-        col = GetComponentInChildren<Collider2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

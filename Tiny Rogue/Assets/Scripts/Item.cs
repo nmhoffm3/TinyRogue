@@ -6,7 +6,7 @@ public class Item : MonoBehaviour
 
     [SerializeField] private ItemType type;
 
-    [SerializeField] private int AMOUNT = 1;
+    [SerializeField] private int amount = 1;
 
     [SerializeField] private float speed = 1;
 
@@ -61,10 +61,10 @@ public class Item : MonoBehaviour
         switch(type)
         {
             case ItemType.EXP:
-                p.ApplyExp(AMOUNT);
+                p.ApplyExp(amount);
                 break;
             case ItemType.HEALTH:
-                p.ApplyHealth(AMOUNT);
+                p.ApplyHealth(amount);
                 break;
         }
 

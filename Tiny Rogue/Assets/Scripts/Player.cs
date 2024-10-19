@@ -46,6 +46,14 @@ public class Player : MonoBehaviour
     {
         HandleLife();
         HandleExp();
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Time.timeScale = 0;
+        }
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            Time.timeScale = 1;
+        }
     }
 
     private void HandleExp()

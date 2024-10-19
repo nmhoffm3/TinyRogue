@@ -52,9 +52,14 @@ public class Projectile : MonoBehaviour
     {
         enemyOwned = true;
     }
+
+    public bool isPierce()
+    {
+        return pierce;
+    }
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if(other.tag.Equals("Enemy"))
+        if(other.tag.Equals("Enemy") && !enemyOwned)
         {
             Enemy e = other.GetComponent<Enemy>();
             if(!e) return;
@@ -68,6 +73,7 @@ public class Projectile : MonoBehaviour
             Player p = other.GetComponent<Player>();
             if(!p) return;
             p.ApplyDamage(damage);
+            origin.PlayHitSound();
             hit = true;
         }
     }

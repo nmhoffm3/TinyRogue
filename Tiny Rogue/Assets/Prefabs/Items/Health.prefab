@@ -25,6 +25,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4553308440786397399, guid: 7874dfea9a447bb488696442b6606ae0, type: 3}
+      propertyPath: amount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553308440786397399, guid: 7874dfea9a447bb488696442b6606ae0, type: 3}
       propertyPath: waitTime
       value: 3
       objectReference: {fileID: 0}
