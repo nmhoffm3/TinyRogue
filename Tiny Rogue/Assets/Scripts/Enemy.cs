@@ -133,6 +133,7 @@ public class Enemy : MonoBehaviour
     {
         if(cooldown == -1)
         {
+            audioSource.PlayOneShot(playerHitSound);
             cooldown = 0;
             return DAMAGE;
         }
@@ -148,6 +149,7 @@ public class Enemy : MonoBehaviour
         if(other.tag.Equals("Player"))
         {
             other.GetComponent<Player>().ApplyDamage(Attack());
+            
         }
     }
 

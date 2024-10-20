@@ -63,13 +63,13 @@ public class EnemySpawner : MonoBehaviour
             {
                 return;
             }
-            if(lvl > enemies.Count)
+            if(lvl >= enemies.Count)
             {
                 index = Random.Range(0, enemies.Count);
             }
             else
             {
-                index = Random.Range(0, lvl);
+                index = Random.Range(0, lvl+1);
             }
             GameObject choice = enemies[index];
             Vector2 cir = Random.insideUnitCircle.normalized;

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4277269182918763037
+--- !u!1001 &2495742629217202430
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,8 +9,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -7823896847185303882, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
+      propertyPath: m_Speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -7823896847185303882, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: stopDist
-      value: 0.6
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1778400875080418173, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: DAMAGE
@@ -18,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1778400875080418173, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: MAX_HEALTH
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1778400875080418173, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: drops.Array.size
@@ -34,15 +38,15 @@ PrefabInstance:
       objectReference: {fileID: 6637902028792253595, guid: e957ced8c7e1dc4489a33973f203c3e5, type: 3}
     - target: {fileID: 1778400875080418173, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: drops.Array.data[0].rate
-      value: 0.05
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1778400875080418173, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: drops.Array.data[1].rate
-      value: 0.005
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1778400875080418173, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: drops.Array.data[0].amount
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1778400875080418173, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: drops.Array.data[1].amount
@@ -51,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 4710082849053636959, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -5829726057563536327, guid: 51c517716b79eba45a82dd308e606365, type: 3}
+      objectReference: {fileID: 6091706668691328248, guid: fbb63b458a7df4642b909ca80b136d03, type: 3}
     - target: {fileID: 4881801633436506577, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -94,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6923083642241638615, guid: d1acb97b658bb60468645dd7b8ed7f0f, type: 3}
       propertyPath: m_Name
-      value: Crab
+      value: Bat
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
